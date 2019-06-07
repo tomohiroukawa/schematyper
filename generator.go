@@ -108,7 +108,13 @@ func (gt goType) print(buf *bytes.Buffer) {
 				}
 				tagString += ",omitempty"
 			}
-			tagString += "\"`"
+			tagString += "\""
+
+			if sf.Required {
+				tagString += " binding:\"required\""
+			}
+
+			tagString += "`"
 		}
 		buf.WriteString(fmt.Sprintf("%s %s %s\n", sf.Name, sfTypeStr, tagString))
 	}
